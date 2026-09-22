@@ -1,8 +1,18 @@
 {
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
   "dependencies": {
+    "bcryptjs": "^3.0.3",
     "dns": "^0.2.2",
     "dotenv": "^18.0.1",
+    "express": "^4.22.3",
+    "jsonwebtoken": "^9.0.3",
     "mongodb": "^7.6.0",
     "mongoose": "^9.10.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }

@@ -3,16 +3,17 @@ const connectDB = require("./config/db")
 const dotenv=require("dotenv")
 const dns=require("dns")
 const courseRoute = require("./routes/courseRoute")
+const authRoute = require("./routes/authRoutes")
+
 const app=express()
 
+app.use(express.json())
 dotenv.config()
 dns.setServers(["1.1.1.1","8.8.8.8"])
 
 app.use("/api/courses",courseRoute)
+app.use("/api/auth",authRoute)
 
-// app.get("/welcome",(req,res)=>{
-//     res.send("Welcome")
-// })
 connectDB()
 
 const PORT=3000;
