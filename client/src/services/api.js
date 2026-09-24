@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000/api';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
 
 export async function apiRequest(path, method = 'GET', data = null, token = '') {
   const headers = { 'Content-Type': 'application/json' };
@@ -8,6 +8,7 @@ export async function apiRequest(path, method = 'GET', data = null, token = '') 
   }
 
   const options = { method, headers };
+
   if (data) {
     options.body = JSON.stringify(data);
   }
