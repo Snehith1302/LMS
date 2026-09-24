@@ -53,32 +53,31 @@ async function createCourses(req, res) {
 
 async function deleteCourses(req, res) {
     try {
-        const courseId = req.params.id
-        const course = await Course.findById(courseId)
+        const courseId = req.params.id;
+
+        const course = await Course.findById(courseId);
 
         if (!course) {
-            return res.status(404).send({
+            return res.status(404).json({
                 message: "Course not found"
-            })
+            });
         }
 
-        // Ensure the instructor owns the course or is an admin
-        if (course.instructor.toString() !== req.user._id.toString() && req.user.role !== 'admin') {
-            return res.status(403).send({
-                message: "Unauthorized to delete this course"
-            })
-        }
+        await Course.findByIdAndDelete(courseId);
 
-        await Course.findByIdAndDelete(courseId)
-        return res.status(200).send({
+        return res.status(200).json({
             message: "Course deleted successfully"
-        })
+        });
+
     } catch (error) {
-        return res.status(500).send({
+        console.error("Delete course error:", error);
+
+        return res.status(500).json({
             message: "Unable to delete course"
-        })
+        });
     }
 }
+
 
 async function updateCourses(req, res) {
     try {
