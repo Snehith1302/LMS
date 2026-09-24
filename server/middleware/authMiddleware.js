@@ -31,15 +31,21 @@ const protect = async (req, res, next) => {
 // allowedRoles = []
 const authorize = (...allowedRoles) => {
     return (req, res, next) => {
+
+        console.log("Authenticated user:", req.user?.email);
+        console.log("User role:", req.user?.role);
+        console.log("Allowed roles:", allowedRoles);
+
         if (!req.user || !allowedRoles.includes(req.user.role)) {
             return res.status(403).json({
                 message: "You do not have permission to perform this action"
-            })
+            });
         }
 
-        return next()
-    }
-}
+        next();
+    };
+};
+
 
 module.exports = {
     protect,
